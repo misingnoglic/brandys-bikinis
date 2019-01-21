@@ -77,6 +77,12 @@ input, select, textarea {
 	margin-right: 10px;
 }
 
+.product:not(.shopify-buy-frame) {
+	width: 200px;
+	height: 200px;
+	background: url(images/loading_bar.svg) no-repeat;
+}
+
 /* Basic */
 
 	@-ms-viewport {
