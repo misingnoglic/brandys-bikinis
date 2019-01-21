@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Brandy's Bikinis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="logo-inner"><img src="images/celine-logo-main.png" alt="" /></span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- <header>
+								<h1>Welcome to Brandy's Bikinis</h1>
+								<p>Quality products that won't break the bank.</p>
+							</header> -->
+							<section class="tiles" id="products">
+							</section>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<!--
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							-->
+							<section>
+								<h2>Follow Us!</h2>
+								<ul class="icons">
+									<li><a href="https://www.instagram.com/brandysbikini/" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="mailto:contact@brandysbikinis.com" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+
+									<!--
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
+								-->
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Brandy's Bikinis. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script type="text/javascript">
+
+			(function () {
+				var scriptURL = 'buy-button-storefront.min.js';
+				const products = [
+					2450348933220,  // The Carolyn Black Hoop Bikini Set
+					2450361483364,  // The Carolyn White Hoop Bikini Set
+					2450510282852,  // The Celeste Black Buckle Bikini Set
+					2450677825636,  // The Daisy Polka Dot Ruffled Bikini Set
+					2450647580772,  // The Hanna Checkered Bikini Set
+					2450442354788,  // The Lexi Cheetah Print Bikini Set
+					2450415321188,  // The Maia Black Polka Dot Ruffled Bikini Set
+					2450591121508,  // The Penelope Ruffled Bikini Set
+				];
+				addDivs();
+				if (window.ShopifyBuy) {
+					if (window.ShopifyBuy.UI) {
+						ShopifyBuyInit();
+					} else {
+						loadScript();
+					}
+				} else {
+					loadScript();
+				}
+
+				function addDivs() {
+					const productDiv = document.getElementById('products');
+					for (var i = 0; i<products.length; i++){
+						var div = document.createElement("div");
+						div.id = 'product-'+products[i];
+						div.className = 'product';
+						productDiv.appendChild(div);
+					}
+				}
+
+				function loadScript() {
+					var script = document.createElement('script');
+					script.async = true;
+					script.src = scriptURL;
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+					script.onload = ShopifyBuyInit;
+				}
+
+				function ShopifyBuyInit() {
+
+					var client = ShopifyBuy.buildClient({
+						domain: 'brandys-bikinis.myshopify.com',
+						storefrontAccessToken: '0d44338a88cbca5f63333842b3150ec7',
+					});
+
+					ShopifyBuy.UI.onReady(client).then(function (ui) {
+						for (var i = 0; i<products.length; i++){
+							ui.createComponent('product', {
+								id: [products[i]],
+								node: document.getElementById('product-'+products[i]),
+								moneyFormat: '%24%7B%7Bamount%7D%7D',
+								options: {
+									"product": {
+										"variantId": "all",
+										"width": "240px",
+										"contents": {
+											"imgWithCarousel": false,
+											"variantTitle": false,
+											"description": false,
+											"buttonWithQuantity": false,
+											"quantity": false
+										},
+										"styles": {
+											"product": {
+												"@media (min-width: 601px)": {
+													"max-width": "100%",
+													"margin-left": "0",
+													"margin-bottom": "50px"
+												}
+											},
+											"button": {
+												"background-color": "#148baf",
+												"font-family": "Montserrat, sans-serif",
+												":hover": {
+													"background-color": "#127d9e"
+												},
+												":focus": {
+													"background-color": "#127d9e"
+												},
+												"font-weight": "bold"
+											},
+											"variantTitle": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"title": {
+												"font-family": "Montserrat, sans-serif"
+											},
+											"description": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"price": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"compareAt": {
+												"font-size": "12px",
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											}
+										},
+										"googleFonts": [
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat"
+										]
+									},
+									"cart": {
+										"contents": {
+											"button": true
+										},
+										"styles": {
+											"cart": {
+												"background-color": "#94d6e8"
+											},
+											"button": {
+												"background-color": "#148baf",
+												"font-family": "Montserrat, sans-serif",
+												":hover": {
+													"background-color": "#127d9e"
+												},
+												":focus": {
+													"background-color": "#127d9e"
+												},
+												"font-weight": "bold"
+											},
+											"footer": {
+												"background-color": "#94d6e8"
+											}
+										},
+										"googleFonts": [
+											"Montserrat"
+										]
+									},
+									"modalProduct": {
+										"contents": {
+											"img": false,
+											"imgWithCarousel": true,
+											"variantTitle": false,
+											"buttonWithQuantity": true,
+											"button": false,
+											"quantity": false
+										},
+										"styles": {
+											"product": {
+												"@media (min-width: 601px)": {
+													"max-width": "100%",
+													"margin-left": "0px",
+													"margin-bottom": "0px"
+												}
+											},
+											"button": {
+												"background-color": "#148baf",
+												"font-family": "Montserrat, sans-serif",
+												":hover": {
+													"background-color": "#127d9e"
+												},
+												":focus": {
+													"background-color": "#127d9e"
+												},
+												"font-weight": "bold"
+											},
+											"variantTitle": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"title": {
+												"font-family": "Montserrat, sans-serif"
+											},
+											"description": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"price": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											},
+											"compareAt": {
+												"font-family": "Montserrat, sans-serif",
+												"font-weight": "normal"
+											}
+										},
+										"googleFonts": [
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat",
+											"Montserrat"
+										]
+									},
+									"toggle": {
+										"styles": {
+											"toggle": {
+												"font-family": "Montserrat, sans-serif",
+												"background-color": "#148baf",
+												":hover": {
+													"background-color": "#127d9e"
+												},
+												":focus": {
+													"background-color": "#127d9e"
+												},
+												"font-weight": "bold"
+											}
+										},
+										"googleFonts": [
+											"Montserrat"
+										]
+									},
+									"option": {
+										"styles": {
+											"label": {
+												"font-family": "Montserrat, sans-serif"
+											},
+											"select": {
+												"font-family": "Montserrat, sans-serif"
+											}
+										},
+										"googleFonts": [
+											"Montserrat",
+											"Montserrat"
+										]
+									},
+									"productSet": {
+										"styles": {
+											"products": {
+												"@media (min-width: 601px)": {
+													"margin-left": "-20px"
+												}
+											}
+										}
+									}
+								}
+							});
+						}
+					});
+				}
+			})();
+			</script>
+
+
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<div id='products'></div>
+    <script type="text/javascript">
+
+    (function () {
+      var scriptURL = 'buy-button-storefront.min.js';
+      const products = [
+        2450348933220,  // The Carolyn Black Hoop Bikini Set
+        2450361483364,  // The Carolyn White Hoop Bikini Set
+        2450510282852,  // The Celeste Black Buckle Bikini Set
+        2450677825636,  // The Daisy Polka Dot Ruffled Bikini Set
+        2450647580772,  // The Hanna Checkered Bikini Set
+        2450442354788,  // The Lexi Cheetah Print Bikini Set
+        2450415321188,  // The Maia Black Polka Dot Ruffled Bikini Set
+        2450591121508,  // The Penelope Ruffled Bikini Set
+      ];
+      addDivs();
+      if (window.ShopifyBuy) {
+        if (window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } else {
+        loadScript();
+      }
+
+      function addDivs() {
+        const productDiv = document.getElementById('products');
+        for (var i = 0; i<products.length; i++){
+          var div = document.createElement("div");
+          div.id = 'product-'+products[i];
+          div.className = 'product';
+          productDiv.appendChild(div);
+        }
+      }
+
+      function loadScript() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = scriptURL;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        script.onload = ShopifyBuyInit;
+      }
+
+      function ShopifyBuyInit() {
+
+        var client = ShopifyBuy.buildClient({
+          domain: 'brandys-bikinis.myshopify.com',
+          storefrontAccessToken: '0d44338a88cbca5f63333842b3150ec7',
+        });
+
+        ShopifyBuy.UI.onReady(client).then(function (ui) {
+          for (var i = 0; i<products.length; i++){
+            ui.createComponent('product', {
+              id: [products[i]],
+              node: document.getElementById('product-'+products[i]),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+                "product": {
+                  "variantId": "all",
+                  "width": "240px",
+                  "contents": {
+                    "imgWithCarousel": false,
+                    "variantTitle": false,
+                    "description": false,
+                    "buttonWithQuantity": false,
+                    "quantity": false
+                  },
+                  "styles": {
+                    "product": {
+                      "@media (min-width: 601px)": {
+                        "max-width": "100%",
+                        "margin-left": "0",
+                        "margin-bottom": "50px"
+                      }
+                    },
+                    "compareAt": {
+                      "font-size": "12px"
+                    }
+                  }
+                },
+                "cart": {
+                  "contents": {
+                    "button": true
+                  },
+                  "styles": {
+                    "footer": {
+                      "background-color": "#ffffff"
+                    }
+                  }
+                },
+                "modalProduct": {
+                  "contents": {
+                    "img": false,
+                    "imgWithCarousel": true,
+                    "variantTitle": false,
+                    "buttonWithQuantity": true,
+                    "button": false,
+                    "quantity": false
+                  },
+                  "styles": {
+                    "product": {
+                      "@media (min-width: 601px)": {
+                        "max-width": "100%",
+                        "margin-left": "0px",
+                        "margin-bottom": "0px"
+                      }
+                    }
+                  }
+                },
+                "productSet": {
+                  "styles": {
+                    "products": {
+                      "@media (min-width: 601px)": {
+                        "margin-left": "-20px"
+                      }
+                    }
+                  }
+                }
+              }
+            });
+          }
+        });
+      }
+    })();
+    </script>
