@@ -80,7 +80,7 @@ input, select, textarea {
 .product:not(.shopify-buy-frame) {
 	width: 200px;
 	height: 200px;
-	background: url(images/loading_bar.svg) no-repeat;
+	background: url(images/heart.svg) no-repeat;
 }
 
 /* Basic */
